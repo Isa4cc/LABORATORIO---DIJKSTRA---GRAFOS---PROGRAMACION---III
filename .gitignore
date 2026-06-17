@@ -1,0 +1,7 @@
+# Ignorar carpeta vs code
+.vscode
+*.class
+*.exe
+*.o
+*.out
+*.log

@@ -99,6 +99,8 @@ public class Grafo {
 
             String nombreActual = actual.getNombre();
 
+            if (visitados.contains(nombreActual)) continue;
+
             visitados.add(nombreActual);
 
             /*
@@ -114,7 +116,7 @@ public class Grafo {
                  * al vecino pasando por el nodo actual.
                  */
 
-                int nuevoCosto = 0; // Reemplazar.
+                int nuevoCosto = distancia.get(nombreActual) + arista.getConsumo();
 
                 /*
                  * TODO:
@@ -127,6 +129,12 @@ public class Grafo {
                  * ¿Por qué volvemos a insertar el nodo
                  * aunque ya pudiera estar en la cola?
                  */
+
+                if (nuevoCosto < distancia.get(vecino)) {
+                    distancia.put(vecino, nuevoCosto);
+                    anterior.put(vecino, nombreActual);
+                    cola.add(new NodoPrioridad(vecino, nuevoCosto));
+                }
 
             }
         }
@@ -146,6 +154,12 @@ public class Grafo {
          * Comienza desde el destino y vaya retrocediendo
          * hasta llegar al origen.
          */
+
+        String paso = destino;
+        while (paso != null) {
+            ruta.addFirst(paso);
+            paso = anterior.get(paso);
+        }
 
         return new ResultadoRuta(
                 ruta,

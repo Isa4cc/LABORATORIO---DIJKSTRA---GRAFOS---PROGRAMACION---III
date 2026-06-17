@@ -34,6 +34,6 @@ public class NodoPrioridad implements Comparable<NodoPrioridad> {
         // Pregunta:
         // ¿Por qué NO queremos que el mayor costo salga primero?
 
-        return 0; // Reemplazar.
+        return Integer.compare(this.costoAcumulado, otro.costoAcumulado);
     }
 }
